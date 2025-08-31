@@ -1,14 +1,15 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { apiKey } from "./config";
+
 
 // Initialize Gemini configuration
 function createGeminiClient() {
-  if (!apiKey) {
+  const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
+  if (!API_KEY) {
     throw new Error('Gemini API key is not configured');
   }
 
-  return new GoogleGenerativeAI(apiKey);
+  return new GoogleGenerativeAI(API_KEY);
 }
 
 export async function sendMsgToGemini(message) {
